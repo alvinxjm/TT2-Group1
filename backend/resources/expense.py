@@ -1,6 +1,8 @@
 from datetime import datetime
 from flask_restful import Resource, reqparse
 from models.expense import ExpenseModel
+from flask import request
+from datetime import datetime
 import json
 import hashlib
 
@@ -30,11 +32,35 @@ class Expense(Resource):
         
         return {'message': 'Expense successfully updated'}, 201
 
-    def put(self, expense):
-        expense = ExpenseModel.find_by_expense_id(expense.expense_id)
-        if expense:
-            return {'message': 'Expense not found'}, 404
-        ExpenseModel.updateExpense(expense)
+    def put(self):
+        data = request.get_json()
+        expense_id = data.get('expense_id')
+        project_id = data.get('project_id')
+        category_id = data.get('category_id')
+        name = data.get('name')
+        description = data.get('description')
+        amount = data.get('amount')
+        updated_by = data.get('updated_by')
+        for compulsory in [expense_id, project_id, category_id, name, description, amount, updated_by]:
+            if compulsory == None:
+                return {'message': f"Missing field."}
+        # if expense_id == None or project_id == None or category_id == None or name == None or description == None or amount == None or updated_by == None:
+        #     return {'message': ''}
+        expense = ExpenseModel.find_by_expense_id(expense_id)
+        try:
+            if expense:
+                expense.project_id = project_id
+                expense.category_id = category_id
+                expense.name=name
+                expense.description = description
+                expense.amount = amount
+                expense.updated_at = datetime.now()
+                expense.updated_by = updated_by
+                expense.save_to_db()
+            else:
+                return {'message': 'Expense not found'}, 404
+        except Exception as e:
+            return {'message': str(e)}
         return {'message': 'Expense successfully updated'}, 200
 
 class ExpensesByExpenseID(Resource):
