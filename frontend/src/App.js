@@ -2,8 +2,9 @@ import { Navbar, Nav } from "react-bootstrap";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import LoginPage from "./components/LoginPage";
+import ProjectPage from "./components/ProjectPage";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import ExpensesPage from "./components/pages/ExpensesPage";
 
@@ -25,11 +26,12 @@ function App() {
           </Navbar.Collapse>
         </Navbar>
 
-        <Routes>
+        <Switch>
           <Route exact path="/"></Route>
-          <Route exact path="/login" element={<LoginPage />} />
-          <Route path="/expenses" element={<ExpensesPage />} />
-        </Routes>
+          <Route exact path="/login" component={LoginPage } />
+          <Route exact path="/projects" component={ProjectPage } />
+          <Route path="/expenses" component={ExpensesPage } />
+        </Switch>
       </Router>
     </div>
   );
