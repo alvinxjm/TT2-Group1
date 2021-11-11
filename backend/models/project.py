@@ -11,7 +11,7 @@ class ProjectModel(db.Model):
     name = db.Column(db.String(80))
     description = db.Column(db.String(50))
     budget = db.Column(db.Float(precision=2))
-    user_id = db.Column(db.Integer, db.ForeignKey('stores.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
     def __init__(self, name, description, budget, user_id):
