@@ -31,7 +31,17 @@ class ExpenseModel(db.Model):
         self.updated_by = updated_by
 
     def json(self):
-        return {'id': self.id, 'name': self.name, 'description': self.description, 'budget': self.budget, 'user_id': self.user_id}
+        return {'id': self.id, 
+        'project_id': self.project_id,
+        'category_id': self.category_id,
+        'name': self.name, 
+        'description': self.description, 
+        'amount': self.amount, 
+        'created_at': self.created_at,
+        'created_by': self.created_by,
+        'updated_at': self.updated_at,
+        'updated_by': self.updated_by,
+        }
 
     def save_to_db(self):
         db.session.add(self)
