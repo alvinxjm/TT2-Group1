@@ -2,30 +2,37 @@ import React, { useState } from "react";
 
 const EditExpense = ({ expense }) => {
   const [description, setDescription] = useState(expense.description);
+  const [amount, setAmount] = useState(0);
+  const [name, setName] = useState('');
+
 
   const updateDescription = () => {
     console.log("Edit button pressed");
   };
 
   // edit description function
-  // const updateDescription = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const body = { description };
-  //     const response = await fetch(
-  //       `http://localhost:5000/expenses/${expense.id}`,
-  //       {
-  //         method: "PUT",
-  //         headers: { "Content-Type": "application/json" },
-  //         body: JSON.stringify(body),
-  //       }
-  //     );
+  const editExpensesAPI = async (e) => {
+    try {
+      const body = { 
+        name:name,
+        amount:amount,
+        description:description,
+        
+       };
+      const response = await fetch(
+        `http://localhost:5000/expenses/${expense.id}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
-  //     window.location = "/";
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
+      window.location = "/";
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   return (
     <>
@@ -65,11 +72,22 @@ const EditExpense = ({ expense }) => {
               />
             </div>
             <div class="modal-body">
-              <input
+              Description: <input
                 type="text"
                 className="form-control"
-                value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              />
+              <br/>
+              name: <input
+                type="text"
+                className="form-control"
+                onChange={(e) => setName(e.target.value)}
+              />
+                            <br/>
+              amount: <input
+                type="text"
+                className="form-control"
+                onChange={(e) => setAmount(e.target.value)}
               />
             </div>
             <div class="modal-footer">
@@ -77,7 +95,7 @@ const EditExpense = ({ expense }) => {
                 type="button"
                 class="btn btn-warning"
                 data-bs-dismiss="modal"
-                onClick={(e) => updateDescription(e)}
+                onClick={editExpensesAPI}
               >
                 Edit
               </button>

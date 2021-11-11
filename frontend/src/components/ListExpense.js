@@ -44,17 +44,17 @@ const ListExpense = () => {
 
 
 
-  // const deleteExpense = async (id) => {
-  //   try {
-  //     const deleteExpense = await fetch(`http://localhost:5000/expense/${id}`, {
-  //       method: "DELETE",
-  //     });
+  const deleteExpenses = async (id) => {
+    try {
+      const deleteExpense = await fetch(`http://localhost:5000/expense/delete/${id}`, {
+        method: "DELETE",
+      });
 
-  //     setExpenses(expenses.filter((expense) => expense.id !== id));
-  //   } catch (err) {
-  //     console.error(err.message);
-  //   }
-  // };
+      setExpenses(expenses.filter((expense) => expense.id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
   // const getExpenses = async () => {
   //   try {
@@ -93,7 +93,7 @@ const ListExpense = () => {
               <td>
                 <button
                   className="btn btn-danger"
-                  onClick={() => deleteExpense(expense.id)}
+                  onClick={() => deleteExpenses(expense.id)}
                 >
                   Delete
                 </button>
