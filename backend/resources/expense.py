@@ -32,7 +32,7 @@ class Expense(Resource):
         expense = ExpenseModel(data['project_id'], data['category_id'], data['name'], data['description'], data['amount'], data['created_at'], data['created_by'], data['updated_at'], data['updated_by'])
         expense.save_to_db()
         
-        return {'message': 'Expense successfully updated'}, 201
+        return {'message': 'Expense successfully created'}, 201
 
     def put(self):
         data = request.get_json()
