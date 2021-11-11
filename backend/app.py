@@ -9,7 +9,7 @@ from resources.project import ProjectsByUserID, AllProjects
 # from resources.order import Order
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@127.0.0.1:3306/project_expenses"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:password@127.0.0.1:3306/project_expenses"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'jose'
