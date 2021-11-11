@@ -1,7 +1,0 @@
-import React from "react";
-
-function Expense() {
-  return <h1>Expense</h1>;
-}
-
-export default Expense;
