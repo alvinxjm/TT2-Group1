@@ -2,6 +2,7 @@ import { Navbar, Nav } from "react-bootstrap";
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import LoginPage from "./components/LoginPage";
+import ProjectPage from "./components/ProjectPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -27,8 +28,9 @@ function App() {
 
         <Switch>
           <Route exact path="/"></Route>
-          <Route exact path="/login" component={LoginPage} />
-          <Route path="/expenses" component={ExpensesPage} />
+          <Route exact path="/login" component={LoginPage } />
+          <Route exact path="/projects" component={ProjectPage } />
+          <Route path="/expenses" component={ExpensesPage } />
         </Switch>
       </Router>
     </div>
