@@ -25,9 +25,9 @@ class ExpenseModel(db.Model):
         self.name = name
         self.description = description
         self.amount = amount
-        self.created_at = created_at
+        self.created_at = datetime.now()
         self.created_by = created_by
-        self.updated_at = updated_at
+        self.updated_at = datetime.now()
         self.updated_by = updated_by
 
     def json(self):
@@ -37,9 +37,9 @@ class ExpenseModel(db.Model):
         'name': self.name, 
         'description': self.description, 
         'amount': self.amount, 
-        'created_at': self.created_at,
+        'created_at': str(self.created_at),
         'created_by': self.created_by,
-        'updated_at': self.updated_at,
+        'updated_at': str(self.updated_at),
         'updated_by': self.updated_by,
         }
 
