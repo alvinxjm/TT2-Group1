@@ -66,11 +66,13 @@ class UserAuth(Resource):
         parser = reqparse.RequestParser()
         user = UserModel.find_by_username(data['username'])
         if user is not None:
-            # hashed = hashlib.sha256(data['password'].encode()).hexdigest()
-            # if user.password == hashed:
-            if user.password == data['password']:
+            hashed = hashlib.sha256(data['password'].encode()).hexdigest()
+            print(hashed)
+            if user.password == hashed:
+            #if user.password == data['password']:
                 access_token = create_access_token(identity='username')
                 return {"status": True, "token": access_token}, 200
             else:
                 return {"status": False, "message": "Password is wrong"}, 401
         return {"status": False, "message": "User not found"}, 404
+
