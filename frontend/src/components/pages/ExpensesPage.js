@@ -1,10 +1,10 @@
 import React from "react";
-import Expense from "../Expense";
+import ListExpense from "../ListExpense";
 
 function ExpensesPage() {
   return (
     <>
-      <Expense />
+      <ListExpense />
     </>
   );
 }

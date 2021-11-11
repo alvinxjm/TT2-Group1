@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import authHeader from "./Auth.js"
 
 
 
@@ -35,11 +36,13 @@ function ProjectPage(){
         getProjectsData()
     }, [])
 
-    const GoExpensesPage = () => {
+    const GoExpensesPage = (e) => {
                 
         history.push({
-            pathname: '/expenses',
-            
+            pathname: '/expenses/'+ e.target.value,
+            state: {
+                projectid: e.target.value
+            }
         })
     }
 
@@ -61,16 +64,31 @@ function ProjectPage(){
                     </tr>
                 </thead>
                 <tbody>
+                    {
+                        data &&  Object.keys(data).map((key)=>
+                        <tr>
+                            <td>
+                                {data[key]["name"]}
+                            </td>
+                            <td>
+                                {data[key]["description"]}
+                            </td>
+                            <td>
+                                {data[key]["budget"]}
+                            </td>
+                            <td>
+                                <Button value = {data[key]["user_id"]} onClick = {GoExpensesPage}> Go</Button>
+                            </td>
+                        </tr>
+                        )
+                        
+                    }
                    <tr>
                        <td>
                             Project 1
                        </td>
                    </tr>
-                   <tr>
-                        <td>
-                            Project 2
-                        </td>
-                   </tr>
+
                 </tbody>
             </Table>
 

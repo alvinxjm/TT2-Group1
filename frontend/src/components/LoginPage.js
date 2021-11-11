@@ -10,7 +10,7 @@ import {
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function LoginPage(){
+function LoginPage(props){
 
     let history = useHistory()
     const [username, setUserName] = useState('')
@@ -20,25 +20,24 @@ function LoginPage(){
     const Login = () => {
         
         axios
-        .post('http://localhost:5000/login', {
+        .post('http://localhost:5000/user/auth', {
                 "username": username,
                 "password":password
         })
         .then(function (response) {
-            if(response.data["access_token"]){
+            if(response.data["token"]){
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             history.push({
-                pathname: '/home',
+                pathname: '/projects',
                 
             })
+            
         })
         .catch(function (error) {
             setFailure(true)
-            if(error.response.data.message === "Database error"){
-                setFailureMessage("Error Occured, email must be unique")
-            }else{
-                setFailureMessage("Error occured, please try again later or go back to movie page.")
+            if(error){
+                setFailureMessage("Error logging in, please try again")
             }
             
         })
@@ -52,6 +51,11 @@ function LoginPage(){
     return(
         <div >
             <br />
+            {failure && (
+                    <Alert variant="danger">
+                        {failureMessage}
+                    </Alert>
+            )}
 
             <p><b>Login User</b></p>
             

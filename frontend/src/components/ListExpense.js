@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EditExpense from "./EditExpense";
+import authHeader from "./Auth.js"
 
 const ListExpense = () => {
   const [expenses, setExpenses] = useState([
