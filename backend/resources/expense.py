@@ -69,8 +69,6 @@ class ExpensesByExpenseID(Resource):
     def delete(self, expense_id):
         expense = ExpenseModel.find_by_expense_id(expense_id)
         if expense:
-            return {'message': 'Expense not found'}, 404
-        ExpenseModel.deleteExpense(expense)
-        return {'message': 'Expense successfully deleted'}, 200
-
-
+            ExpenseModel.deleteExpense(expense)
+            return {'message': 'Expense successfully deleted'}, 200
+        return {'message': 'Expense not found'}, 404
