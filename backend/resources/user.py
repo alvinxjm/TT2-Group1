@@ -75,4 +75,3 @@ class UserAuth(Resource):
             else:
                 return {"status": False, "message": "Password is wrong"}, 401
         return {"status": False, "message": "User not found"}, 404
-

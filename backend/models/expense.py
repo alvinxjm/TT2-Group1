@@ -53,17 +53,15 @@ class ExpenseModel(db.Model):
 
     @classmethod
     def find_by_expense_id(cls, expense_id):
-        return cls.query.filter_by(expense_id=expense_id)
-
-    @classmethod
-    def insertExpense(cls, expense):
-        return 
+        return cls.query.filter_by(expense_id=expense_id).first()
 
     @classmethod
     def updateExpense(cls, expense):
         return 
 
     @classmethod
-    def deleteExpense(cls, expense_id):
-         return 
+    def deleteExpense(cls, expense):
+        db.session.delete(expense)
+        db.session.commit()
+        return 
 

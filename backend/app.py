@@ -5,7 +5,7 @@ from flask_cors import CORS
 
 # from security import authenticate, identity
 from resources.user import UserRegister, Users, UserAuth
-from resources.expense import ExpenseByProjectID, Expense
+from resources.expense import ExpenseByProjectID, ExpensesByExpenseID, Expense
 from resources.project import ProjectsByUserID, AllProjects
 
 # from resources.item import Item, ItemList
@@ -45,6 +45,7 @@ jwt = JWTManager(app)
 # api.add_resource(Item, '/item/<string:name>')
 # api.add_resource(ItemList, '/items')
 api.add_resource(ExpenseByProjectID,'/expense/<int:project_id')
+api.add_resource(ExpensesByExpenseID,'/expense/delete/<int:expense_id>')
 api.add_resource(Expense,'/expense')
 api.add_resource(ProjectsByUserID, '/project/user/<string:user_id>')
 api.add_resource(AllProjects, '/project')
