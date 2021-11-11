@@ -42,6 +42,10 @@ class ExpenseModel(db.Model):
         return cls.query.filter_by(project_id=project_id).all()
 
     @classmethod
+    def find_by_expense_id(cls, expense_id):
+        return cls.query.filter_by(expense_id=expense_id)
+
+    @classmethod
     def insertExpense(cls, expense):
         return 
 

@@ -16,6 +16,7 @@ class ExpenseByProjectID(Resource):
             return {'message': 'User not found'}, 404
         return [expense.json() for expense in expenses]
 
+class Expense(Resource):
     def put(self, expense):
         expense = ExpenseModel.find_by_expense_id(expense.expense_id)
         if expense:
