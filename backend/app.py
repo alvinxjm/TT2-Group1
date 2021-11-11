@@ -10,12 +10,25 @@ from resources.project import ProjectsByUserID, AllProjects
 # from resources.item import Item, ItemList
 # from resources.order import Order
 
+from flask import Flask
+from flask import jsonify
+from flask import request
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:root@127.0.0.1:3306/project_expenses"
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:password@127.0.0.1:3306/project_expenses"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'jose'
 api = Api(app)
+
+
+app.config["JWT_SECRET_KEY"] = "secret" 
+jwt = JWTManager(app)
 
 
 # @app.before_first_request

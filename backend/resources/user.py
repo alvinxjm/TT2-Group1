@@ -4,6 +4,19 @@ import json
 import hashlib
 
 
+from flask import Flask
+from flask import jsonify
+from flask import request
+
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+app = Flask(__name__)
+app.config["JWT_SECRET_KEY"] = "secret" 
+jwt = JWTManager(app)
+
+
 class UserRegister(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('username',
@@ -56,8 +69,8 @@ class UserAuth(Resource):
             # hashed = hashlib.sha256(data['password'].encode()).hexdigest()
             # if user.password == hashed:
             if user.password == data['password']:
-                return {"status": True}, 200
+                access_token = create_access_token(identity='username')
+                return {"status": True, "token": access_token}, 200
             else:
                 return {"status": False, "message": "Password is wrong"}, 401
         return {"status": False, "message": "User not found"}, 404
-
