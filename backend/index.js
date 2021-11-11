@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
+import userRouter from './routes/user.js';
 
 //variables
 const app = express();
@@ -15,8 +16,10 @@ app.get('/', (req,res)=> {
     res.send("budget app backend server");
   })
 
+app.use("/user", userRouter);
+
 //connection
-const CONNECTION_URL = 'mongodb+srv://alvinxjm:Alvin12345@cluster0.7q3iu.mongodb.net/backend?retryWrites=true&w=majority';
+const CONNECTION_URL = 'mongodb+srv://alvinxjm:Alvin12345@cluster0.7q3iu.mongodb.net/budgetapp?retryWrites=true&w=majority';
 const PORT = process.env.PORT|| 5000;
 
 //mongodb connection
