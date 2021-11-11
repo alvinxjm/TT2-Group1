@@ -5,6 +5,7 @@ from flask_jwt import JWT
 # from security import authenticate, identity
 from resources.user import UserRegister, Users, UserAuth
 from resources.project import ProjectsByUserID
+from resources.expense import ExpenseByProjectID
 # from resources.item import Item, ItemList
 # from resources.order import Order
 
@@ -27,6 +28,7 @@ api = Api(app)
 # # api.add_resource(StoreList, '/stores')
 # api.add_resource(Item, '/item/<string:name>')
 # api.add_resource(ItemList, '/items')
+api.add_resource(ExpenseByProjectID,'/expense/<int:project_id')
 api.add_resource(ProjectsByUserID, '/project/<string:user_id>')
 api.add_resource(UserRegister, '/register')
 api.add_resource(Users, '/user/<string:name>')
