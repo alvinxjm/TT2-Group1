@@ -1,6 +1,7 @@
 import hashlib
 import json
 import dateutil.parser
+from models.category import CategoryModel
 from db import db
 from datetime import datetime
 
@@ -9,25 +10,47 @@ class ExpenseModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable = False)
     project_id = db.Column(db.Integer, db.ForeignKey('project.id'), nullable = False)
-    category_id = db.Column(db.Integer, nullable = False)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    # category_id = db.relationship(CategoryModel)
     name = db.Column(db.String(80), nullable = False)
     description = db.Column(db.String(50), nullable = False)
     amount = db.Column(db.Float(precision=2), nullable = False)
     created_at = db.Column(db.DateTime, nullable = True)
     created_by = db.Column(db.String(80), nullable = True)
     updated_at = db.Column(db.DateTime, nullable = True)
-    updated_by = db.Column(db.String(80), nullable = True)
+    updated_by = db.Column(db.String(80), db.ForeignKey('user.id'), nullable = True)
 
-    def __init__(self, project_id, category_id, name, description, amount, created_at, created_by, updated_at, updated_by):
+    def __init__(self, 
+        project_id=project_id, 
+        category_id=category_id, 
+        name=name, 
+        description=description, 
+        amount=amount, 
+        created_at=None, 
+        created_by=created_by, 
+        updated_at=None, 
+        updated_by=updated_by):
         # self.id = id
         self.project_id = project_id
         self.category_id = category_id
         self.name = name
         self.description = description
         self.amount = amount
+<<<<<<< HEAD
         self.created_at = created_at
         self.created_by = created_by
         self.updated_at = updated_at
+=======
+        if created_at:
+            self.created_at = created_at
+        else:
+            self.created_at = datetime.now()
+        self.created_by = created_by
+        if updated_at:
+            self.updated_at = updated_at
+        else:
+            self.updated_at = datetime.now()
+>>>>>>> 73ecb810410b6038156c3782bc8faba09f2da064
         self.updated_by = updated_by
 
     def json(self):
@@ -53,7 +76,12 @@ class ExpenseModel(db.Model):
 
     @classmethod
     def find_by_expense_id(cls, expense_id):
-        return cls.query.filter_by(expense_id=expense_id).first()
+        return cls.query.filter_by(id=expense_id).first()
+
+    @classmethod
+    def insertExpense(cls, expense):
+        cls.save(expense)
+        return expense
 
     @classmethod
     def updateExpense(cls, expense):
