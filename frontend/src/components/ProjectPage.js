@@ -37,7 +37,7 @@ function ProjectPage(){
     }, [])
 
     const GoExpensesPage = (e) => {
-                
+        console.log(e.target.value)
         history.push({
             pathname: '/expenses/'+ e.target.value,
             state: {

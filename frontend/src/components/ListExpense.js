@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import EditExpense from "./EditExpense";
 import authHeader from "./Auth.js"
-
+import { useHistory, useLocation } from 'react-router-dom'
 const ListExpense = () => {
+
+
+  const location = useLocation();
+  
+
   const [expenses, setExpenses] = useState([
     {
       id: 1,
@@ -37,6 +42,7 @@ const ListExpense = () => {
 
   const getExpenses = () => {
     console.log("get expense");
+    console.log(location.state.projectid)
   };
 
   // const deleteExpense = async (id) => {
