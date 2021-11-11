@@ -4,7 +4,7 @@ from flask_jwt import JWT
 
 # from security import authenticate, identity
 from resources.user import UserRegister, Users, UserAuth
-from resources.project import ProjectsByUserID
+from resources.project import ProjectsByUserID, AllProjects
 # from resources.item import Item, ItemList
 # from resources.order import Order
 
@@ -27,10 +27,11 @@ api = Api(app)
 # # api.add_resource(StoreList, '/stores')
 # api.add_resource(Item, '/item/<string:name>')
 # api.add_resource(ItemList, '/items')
-api.add_resource(ProjectsByUserID, '/project/<string:user_id>')
+api.add_resource(ProjectsByUserID, '/project/user/<string:user_id>')
+api.add_resource(AllProjects, '/project')
 api.add_resource(UserRegister, '/register')
 api.add_resource(Users, '/user/<string:name>')
-api.add_resource(UserAuth, '/auth')
+api.add_resource(UserAuth, '/user/auth')
 
 if __name__ == '__main__':
     from db import db

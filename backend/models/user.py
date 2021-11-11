@@ -17,7 +17,7 @@ class UserModel(db.Model):
     def __init__(self, username, password, name, appointment):
         # self.id = id
         self.username = username
-        self.password = hashlib.sha256(password.encode()).hexdigest()
+        self.password = password #hashlib.sha256(password.encode()).hexdigest()
         self.name = name
         self.appointment = appointment
 
