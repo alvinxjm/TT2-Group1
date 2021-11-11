@@ -25,6 +25,10 @@ class ExpenseByProjectID(Resource):
         return {'message': 'No expenses found for this project'}, 200
 
 class Expense(Resource):
+    def get(self): 
+        expenses = ExpenseModel.query.all()
+        return [expense.json() for expense in expenses], 200
+
     def post(self):
         data = ExpenseByProjectID.parser.parse_args()
         data['category_id'] = 2
