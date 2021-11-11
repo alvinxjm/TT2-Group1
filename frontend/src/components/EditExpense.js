@@ -4,6 +4,7 @@ const EditExpense = ({ expense }) => {
   const [description, setDescription] = useState(expense.description);
   const [amount, setAmount] = useState(0);
   const [name, setName] = useState('');
+  const [descriptionV, setDescriptionV] = useState('');
 
 
   const updateDescription = () => {
@@ -16,19 +17,27 @@ const EditExpense = ({ expense }) => {
       const body = { 
         name:name,
         amount:amount,
-        description:description,
-        
+        description:descriptionV,
+          expense_id: 1,
+          
+          project_id: 2,
+          
+          category_id: 2,
+
+          
+          updated_by: "user101"
+          
+          
        };
       const response = await fetch(
-        `http://localhost:5000/expenses/${expense.id}`,
+        `http://localhost:5000/expense`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }
-      );
+      ).catch(error => {console.log(error)})
 
-      window.location = "/";
     } catch (err) {
       console.error(err.message);
     }
@@ -75,7 +84,7 @@ const EditExpense = ({ expense }) => {
               Description: <input
                 type="text"
                 className="form-control"
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setDescriptionV(e.target.value)}
               />
               <br/>
               name: <input

@@ -83,11 +83,7 @@ function ProjectPage(){
                         )
                         
                     }
-                   <tr>
-                       <td>
-                            Project 1
-                       </td>
-                   </tr>
+
 
                 </tbody>
             </Table>

@@ -102,7 +102,6 @@ function App() {
           <Route path="/expenses/:id" component={ExpensesPage } />
         </Switch>
       </Router>
-      <div> Welcome {}</div>
     </div>
   );
 }
