@@ -32,12 +32,10 @@ class UserRegister(Resource):
                         )
     parser.add_argument('name',
                         type=str,
-                        
                         help="This field cannot be blank."
                         )
     parser.add_argument('appointment',
                         type=str,
-                        
                         help="This field cannot be blank."
                         )
 
@@ -85,4 +83,3 @@ class UserAuth(Resource):
             else:
                 return {"status": False, "message": "Password is wrong"}, 401
         return {"status": False, "message": "User not found"}, 404
-
