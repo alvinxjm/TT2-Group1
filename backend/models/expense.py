@@ -36,11 +36,7 @@ class ExpenseModel(db.Model):
         self.name = name
         self.description = description
         self.amount = amount
-<<<<<<< HEAD
-        self.created_at = created_at
-        self.created_by = created_by
-        self.updated_at = updated_at
-=======
+
         if created_at:
             self.created_at = created_at
         else:
@@ -50,7 +46,6 @@ class ExpenseModel(db.Model):
             self.updated_at = updated_at
         else:
             self.updated_at = datetime.now()
->>>>>>> 73ecb810410b6038156c3782bc8faba09f2da064
         self.updated_by = updated_by
 
     def json(self):
@@ -82,10 +77,6 @@ class ExpenseModel(db.Model):
     def insertExpense(cls, expense):
         cls.save(expense)
         return expense
-
-    @classmethod
-    def updateExpense(cls, expense):
-        return 
 
     @classmethod
     def deleteExpense(cls, expense):
