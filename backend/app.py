@@ -19,7 +19,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
-
+from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+mysqlconnector://root:password@127.0.0.1:3306/project_expenses"
@@ -32,7 +32,7 @@ api = Api(app)
 app.config["JWT_SECRET_KEY"] = "secret" 
 jwt = JWTManager(app)
 
-
+CORS(app)
 # @app.before_first_request
 # def create_tables():
 #     db.create_all()
