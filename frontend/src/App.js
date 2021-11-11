@@ -67,10 +67,7 @@ function App() {
       localStorage.removeItem("user");
       setUser(undefined)
       setIsLoggedIn(false)
-      history.push({
-        pathname: '/projects',
-        
-      })
+
     };
   const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("user"));

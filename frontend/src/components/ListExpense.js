@@ -2,39 +2,16 @@ import React, { useState, useEffect } from "react";
 import EditExpense from "./EditExpense";
 import authHeader from "./Auth.js"
 import { useHistory, useLocation } from 'react-router-dom'
+
+import axios from 'axios'
+
 const ListExpense = () => {
 
 
   const location = useLocation();
   
 
-  const [expenses, setExpenses] = useState([
-    {
-      id: 1,
-      project_id: 2,
-      category_id: 2,
-      name: "Server Maintenance",
-      description:
-        "Server maintenance and upgrading work to incorporate BC plans",
-      amount: 30000,
-      created_at: "2021-11-04T16:00:00.000Z",
-      created_by: "Jacky",
-      updated_at: "2021-11-06T16:00:00.000Z",
-      updated_by: "Jacky",
-    },
-    {
-      id: 2,
-      project_id: 3,
-      category_id: 4,
-      name: "Consultant",
-      description: "Consultancy services for integration work",
-      amount: 10000,
-      created_at: "2021-11-06T16:00:00.000Z",
-      created_by: "Helen",
-      updated_at: "2021-11-07T16:00:00.000Z",
-      updated_by: "Helen",
-    },
-  ]);
+  const [expenses, setExpenses] = useState([]);
 
   const deleteExpense = () => {
     console.log("delete expense");
@@ -44,6 +21,28 @@ const ListExpense = () => {
     console.log("get expense");
     console.log(location.state.projectid)
   };
+
+  useEffect(() => {
+        
+    const getExpensesData = async () => {
+      
+        const result = axios.get('http://localhost:5000/expense/'+location.state.projectid).then((res)=>{
+          console.log(expenses)
+            setExpenses(res.data)
+            console.log(res)
+            console.log(res.data)
+        })  
+        
+
+    }
+
+    getExpensesData()
+}, [])
+
+
+
+
+
 
   // const deleteExpense = async (id) => {
   //   try {
@@ -70,9 +69,7 @@ const ListExpense = () => {
   //   }
   // };
 
-  useEffect(() => {
-    getExpenses();
-  }, []);
+
 
   return (
     <>
@@ -86,7 +83,7 @@ const ListExpense = () => {
           </tr>
         </thead>
         <tbody>
-          {expenses.map((expense) => (
+          {expenses.length>0 && expenses.map((expense) => (
             <tr key={expense.id}>
               <td>{expense.description}</td>
               <td>{expense.amount}</td>
