@@ -9,8 +9,8 @@ import {
 } from 'react-bootstrap'
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
-import BootstrapTable from "react-bootstrap-table-next";
+
+
 
 
 function ProjectPage(){
@@ -21,11 +21,11 @@ function ProjectPage(){
       
         const getProjectsData = async () => {
 
-            // const result = axios.get('localhost:5000/project').then((res)=>{
-            //     setData(res.data)
-            //     console.log(res)
-            //     console.log(res.data)
-            // })  
+            const result = axios.get('http://localhost:5000/project').then((res)=>{
+                setData(res.data)
+                console.log(res)
+                console.log(res.data)
+            })  
             
 
 

@@ -15,12 +15,31 @@ function LoginPage(){
     let history = useHistory()
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
-
+    const [failure, setFailure] = useState(false)
+    const [failureMessage, setFailureMessage] = useState("")
     const Login = () => {
         
-
-        history.push({
-            pathname: '/home',
+        axios
+        .post('http://localhost:5000/login', {
+                "username": username,
+                "password":password
+        })
+        .then(function (response) {
+            if(response.data["access_token"]){
+                localStorage.setItem("user", JSON.stringify(response.data));
+            }
+            history.push({
+                pathname: '/home',
+                
+            })
+        })
+        .catch(function (error) {
+            setFailure(true)
+            if(error.response.data.message === "Database error"){
+                setFailureMessage("Error Occured, email must be unique")
+            }else{
+                setFailureMessage("Error occured, please try again later or go back to movie page.")
+            }
             
         })
 
