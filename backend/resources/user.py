@@ -32,12 +32,12 @@ class UserRegister(Resource):
                         )
     parser.add_argument('name',
                         type=str,
-                        required=True,
+                        
                         help="This field cannot be blank."
                         )
     parser.add_argument('appointment',
                         type=str,
-                        required=True,
+                        
                         help="This field cannot be blank."
                         )
 

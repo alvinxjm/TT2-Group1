@@ -19,9 +19,9 @@ function ProjectPage(){
     const[data,setData] = useState(null);
 
     useEffect(() => {
-      
+        
         const getProjectsData = async () => {
-
+            
             const result = axios.get('http://localhost:5000/project').then((res)=>{
                 setData(res.data)
                 console.log(res)
@@ -29,7 +29,7 @@ function ProjectPage(){
             })  
             
 
-
+            
             console.log("hi")
         }
 
