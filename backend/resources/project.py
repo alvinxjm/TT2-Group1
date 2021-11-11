@@ -9,4 +9,9 @@ class ProjectsByUserID(Resource):
         if projects:
             return [project.json() for project in projects]
         return {'message': 'User not found'}, 404
+    
+class AllProjects(Resource):
+    def get(self):
+        projects = ProjectModel.query.all()
+        return [project.json() for project in projects], 200
 
